@@ -11,32 +11,28 @@ use RadioBot\Modules\Bot\Exceptions\BotFactoryException;
 class BotFactory
 {
     /**
-     * @var array
-     */
-    public static $bots = [
-        'radio' => 'radio',
-    ];
-
-    /**
      * Create bot by bot name.
      *
-     * @param string $botName
+     * @param string $bot
      * @param array  $data
      *
      * @return \Illuminate\Foundation\Application|mixed|string
+     *
+     * @throws BotFactoryException
      */
-    public function make(string $botName, array $data): BotContract
+    public function make(string $bot, array $data): BotContract
     {
         try {
-            if (isset(static::$bots[$botName])) {
-                return app(static::$bots[$botName], [
-                    'data' => $data
-                ]);
+            $bot = app($bot, ['data' => $data]);
+
+            if(!$bot instanceof BotContract)
+            {
+                throw new BotFactoryException('Invalid bot.');
             }
 
-            throw new BotFactoryException('Bot does not exists');
+            return $bot;
         } catch (\Throwable $ex) {
-            return json_encode($ex);
+            throw new BotFactoryException('Bot does not exists');
         }
     }
 }

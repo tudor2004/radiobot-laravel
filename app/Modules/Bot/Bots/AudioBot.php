@@ -2,14 +2,14 @@
 
 namespace RadioBot\Modules\Bot\Bots;
 
-use RadioBot\Modules\Bot\Commands\RadioOffCommand;
-use RadioBot\Modules\Bot\Commands\RadioOnCommand;
+use RadioBot\Modules\Bot\Commands\AudioOffCommand;
+use RadioBot\Modules\Bot\Commands\AudioOnCommand;
 use RadioBot\Modules\Bot\Contracts\BotContract;
 
 /**
- * Class Radio
+ * Class AudioBot
  */
-class Radio extends AbstractBot implements BotContract
+class AudioBot extends AbstractBot implements BotContract
 {
     /**
      * @inheritDoc
@@ -25,8 +25,8 @@ class Radio extends AbstractBot implements BotContract
     public function commands(): array
     {
         return [
-            RadioOnCommand::class,
-            RadioOffCommand::class
+            AudioOnCommand::class,
+            AudioOffCommand::class
         ];
     }
 

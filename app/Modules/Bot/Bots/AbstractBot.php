@@ -2,6 +2,8 @@
 
 namespace RadioBot\Modules\Bot\Bots;
 
+use Psy\Command\Command;
+use RadioBot\Modules\Bot\Contracts\BotContract;
 use RadioBot\Modules\Bot\Contracts\CommandContract;
 use RadioBot\Modules\Bot\Exceptions\BotException;
 
@@ -45,7 +47,7 @@ abstract class AbstractBot
                 return;
             }
 
-            if (!$this->commandIsSupported($this->getCommandName())) {
+            if (!$this->botCanRunCommand($this->getCommandName())) {
                 return;
             }
 
@@ -58,7 +60,7 @@ abstract class AbstractBot
 
             $response = $command->handle();
 
-            $this->respond($response);
+            return $this->respond($response);
 
         } catch (\Throwable $ex) {
 
@@ -75,7 +77,9 @@ abstract class AbstractBot
     private function respond(string $message)
     {
         // TODO respond in chat
-        return [];
+        return [
+            'text' => $message
+        ];
     }
 
     /**
@@ -85,16 +89,10 @@ abstract class AbstractBot
      */
     private function getCommandName(): string
     {
-        $message = '';
-
-        if (isset($this->data['text'])) {
-            $message = $this->data['text'];
-        }
-
         $command = '';
 
-        if (mb_substr($message, 0, 1) == '!') {
-            list($command) = explode(' ', mb_substr($message, 1));
+        if (isset($this->data['text'])) {
+            $command = $this->data['text'];
         }
 
         return $command;
@@ -107,10 +105,7 @@ abstract class AbstractBot
      */
     private function getUserName(): string
     {
-        if (isset($this->data['sender']) &&
-            isset($this->data['sender']['name']) &&
-            isset($this->data['sender']['type']) &&
-            $this->data['sender']['type'] === 'HUMAN') {
+        if (isset($this->data['sender']) && isset($this->data['sender']['name']) && isset($this->data['sender']['type']) && $this->data['sender']['type'] === 'HUMAN') {
             return $this->data['sender']['name'];
         }
 
@@ -124,13 +119,14 @@ abstract class AbstractBot
      *
      * @return bool
      */
-    public function commandIsSupported(string $commandName): bool
+    public function botCanRunCommand(string $commandName): bool
     {
-        /** @var CommandContract $command */
-        foreach ($this->commands() as $command) {
-            if ($command->name() == $commandName) {
-                return true;
-            }
+        try {
+            $this->getBotCommand($commandName);
+
+            return true;
+        } catch (\Throwable $ex) {
+
         }
 
         return false;
@@ -148,17 +144,14 @@ abstract class AbstractBot
      */
     private function userCanRunCommand(string $commandName, string $userName): bool
     {
-        if(empty($userName))
-        {
+        if (empty($userName)) {
             return false;
         }
 
         $botCommand = $this->getBotCommand($commandName);
 
-        foreach($botCommand->allowedUsers() as $user)
-        {
-            if($user === '*' || $user === $userName)
-            {
+        foreach ($botCommand->allowedUsers() as $user) {
+            if ($user === '*' || $user === $userName) {
                 return true;
             }
         }
@@ -177,10 +170,18 @@ abstract class AbstractBot
      */
     private function getBotCommand(string $commandName): CommandContract
     {
+        // TODO we need to check here for regular expressions so that we also allow command like !audio on hello world omg
+
         /** @var CommandContract $command */
-        foreach ($this->commands() as $command) {
-            if ($command->name() == $commandName) {
-                return $command;
+        foreach ($this->commands() as $botCommand) {
+            try {
+                $command = app($botCommand);
+
+                if ($command instanceof CommandContract && $command->name() === $commandName) {
+                    return $command;
+                }
+            } catch (\Throwable $ex) {
+
             }
         }
 

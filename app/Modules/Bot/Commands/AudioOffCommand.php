@@ -2,10 +2,12 @@
 
 namespace RadioBot\Modules\Bot\Commands;
 
+use RadioBot\Modules\Bot\Contracts\CommandContract;
+
 /**
- * Class RadioOnCommand
+ * Class AudioOffCommand
  */
-class RadioOnCommand
+class AudioOffCommand implements CommandContract
 {
     /**
      * @inheritdoc
@@ -20,7 +22,7 @@ class RadioOnCommand
      */
     public function name(): string
     {
-        return 'on';
+        return '!audio off';
     }
 
     /**
@@ -28,7 +30,7 @@ class RadioOnCommand
      */
     public function description(): string
     {
-        return 'Turns radio on';
+        return 'Turns radio off';
     }
 
     /**
@@ -36,6 +38,6 @@ class RadioOnCommand
      */
     public function handle()
     {
-        return 'Turning radio on';
+        return 'Turning radio off';
     }
 }

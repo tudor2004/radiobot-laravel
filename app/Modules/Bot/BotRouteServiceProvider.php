@@ -14,6 +14,7 @@ class BotRouteServiceProvider extends RouteServiceProvider
     {
         $router->version('v1', ['namespace' => '\RadioBot\Modules\Bot\Controllers'], function (Router $router) {
             $router->post('webhook', 'BotController@webhook');
+            $router->post('mopidy', 'MopidyController@execute');
         });
     }
 }

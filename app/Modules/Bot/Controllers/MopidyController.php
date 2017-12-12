@@ -12,7 +12,7 @@ class MopidyController extends Controller
     {
         $client = new Client();
 
-        $res = $client->post('http://1270.0.0.1:6680/mopidy/rpc', [
+        $res = $client->post('http://127.0.0.1:6680/mopidy/rpc', [
             'headers' => [
                 'Content-Type' => 'application/json'
             ],

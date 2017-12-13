@@ -42,12 +42,17 @@ class AudioPlayTrackNumber implements CommandContract
         /** @var MopidyClient $client */
         $client = app(MopidyClient::class);
 
+        $trackId = $this->getTrackId($command);
+
         $response = $client->call([
             'method' => 'core.playback.play',
-            'id' => $this->getTrackId($command),
+            'params' => [
+                'tlid' => $trackId,
+            ],
+            'id' => 1,
         ]);
 
-        return 'Playing...';
+        return 'Playing track id ' . $trackId . '.';
     }
 
     /**

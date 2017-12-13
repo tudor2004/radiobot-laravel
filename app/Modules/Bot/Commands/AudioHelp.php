@@ -55,7 +55,7 @@ class AudioHelp implements CommandContract
                 $command = app($botCommand);
 
                 if ($command instanceof CommandContract) {
-                    $help[] = '<b>' . $command->name() . '</b> - ' . $command->description();
+                    $help[] = '*' . $command->name() . '* - ' . $command->description();
                 }
             } catch (\Throwable $ex) {
 

@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'host' => 'http://office.plentymarkets.com',
-    'port' => 8084,
+    'host' => env('MOPIDY_HOST'),
+    'port' => env('MOPIDY_PORT'),
 ];

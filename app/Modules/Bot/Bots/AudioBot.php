@@ -8,6 +8,7 @@ use RadioBot\Modules\Bot\Commands\AudioGetTracks;
 use RadioBot\Modules\Bot\Commands\AudioOffCommand;
 use RadioBot\Modules\Bot\Commands\AudioOnCommand;
 use RadioBot\Modules\Bot\Commands\AudioPlayTrackNumber;
+use RadioBot\Modules\Bot\Commands\AudioStop;
 use RadioBot\Modules\Bot\Commands\AudioVolume;
 use RadioBot\Modules\Bot\Contracts\BotContract;
 
@@ -34,6 +35,7 @@ class AudioBot extends AbstractBot implements BotContract
             AudioOffCommand::class,
             AudioAddYoutubeTrack::class,
             AudioPlayTrackNumber::class,
+            AudioStop::class,
             AudioGetTracks::class,
             AudioClearTracks::class,
             AudioVolume::class,

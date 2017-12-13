@@ -23,7 +23,7 @@ class AudioPlayTrackNumber implements CommandContract
      */
     public function name(): string
     {
-        return '!audio play track (.+)';
+        return '!audio play( track (.+))?';
     }
 
     /**
@@ -31,7 +31,7 @@ class AudioPlayTrackNumber implements CommandContract
      */
     public function description(): string
     {
-        return 'Play track by track number.';
+        return 'Play track by track number. If no track is given than it just plays.';
     }
 
     /**
@@ -44,15 +44,27 @@ class AudioPlayTrackNumber implements CommandContract
 
         $trackId = (int) $this->getTrackId($command);
 
+        $params = [];
+
+        if($trackId)
+        {
+            $params = [
+                'tlid' => $trackId
+            ];
+        }
+
         $response = $client->call([
             'method' => 'core.playback.play',
-            'params' => [
-                'tlid' => $trackId,
-            ],
+            'params' => $params,
             'id' => 1,
         ]);
 
-        return 'Playing track id ' . $trackId . '.';
+        if($trackId)
+        {
+            return 'Playing track id ' . $trackId . '.';
+        }
+
+        return 'Playing from where I left off.';
     }
 
     /**
@@ -60,19 +72,19 @@ class AudioPlayTrackNumber implements CommandContract
      *
      * @param string $command
      *
-     * @return string
+     * @return string|null
      *
      * @throws \Exception
      */
-    private function getTrackId(string $command): string
+    private function getTrackId(string $command)
     {
         preg_match('/' . $this->name() . '/', $command, $matches);
 
-        if(is_array($matches) && isset($matches[1]))
+        if(is_array($matches) && isset($matches[2]))
         {
-            return $matches[1];
+            return $matches[2];
         }
 
-        throw new \Exception('Invalid track number.');
+        return null;
     }
 }

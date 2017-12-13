@@ -2,8 +2,11 @@
 
 namespace RadioBot\Modules\Bot\Bots;
 
+use RadioBot\Modules\Bot\Commands\AudioAddYoutubeTrack;
+use RadioBot\Modules\Bot\Commands\AudioGetTracks;
 use RadioBot\Modules\Bot\Commands\AudioOffCommand;
 use RadioBot\Modules\Bot\Commands\AudioOnCommand;
+use RadioBot\Modules\Bot\Commands\AudioPlayTrackNumber;
 use RadioBot\Modules\Bot\Contracts\BotContract;
 
 /**
@@ -26,7 +29,10 @@ class AudioBot extends AbstractBot implements BotContract
     {
         return [
             AudioOnCommand::class,
-            AudioOffCommand::class
+            AudioOffCommand::class,
+            AudioAddYoutubeTrack::class,
+            AudioPlayTrackNumber::class,
+            AudioGetTracks::class,
         ];
     }
 

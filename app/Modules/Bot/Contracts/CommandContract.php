@@ -31,7 +31,11 @@ interface CommandContract
     /**
      * Here happens all the magic.
      *
+     * @param string $command
+     *
      * Run command.
+     *
+     * @return string
      */
-    public function handle();
+    public function handle(string $command): string;
 }

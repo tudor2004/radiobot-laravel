@@ -36,7 +36,7 @@ class AudioOnCommand implements CommandContract
     /**
      * @inheritDoc
      */
-    public function handle()
+    public function handle(string $command): string
     {
         return 'Turning audio on';
     }

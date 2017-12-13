@@ -39,31 +39,33 @@ abstract class AbstractBot
 
     /**
      * Execute the command.
+     *
+     * @return array
      */
     public final function run()
     {
         try {
             if (empty($this->commands())) {
-                return;
+                return $this->respond('Sorry, but I have found no registered command.');
             }
 
             if (!$this->botCanRunCommand($this->getCommandName())) {
-                return;
+                return $this->respond('Sorry, but the current bot cannot run this command.');
             }
 
             if (!$this->userCanRunCommand($this->getCommandName(), $this->getUserName())) {
-                return;
+                return $this->respond('Hey, what are you doing?! You are not allowed to run this command...');
             }
 
             /** @var CommandContract $command */
             $command = $this->getBotCommand($this->getCommandName());
 
-            $response = $command->handle();
+            $response = $command->handle($this->getCommandName());
 
             return $this->respond($response);
 
         } catch (\Throwable $ex) {
-
+            return $this->respond('Sorry, but something went wrong: ' . $ex->getMessage());
         }
     }
 
@@ -177,7 +179,7 @@ abstract class AbstractBot
             try {
                 $command = app($botCommand);
 
-                if ($command instanceof CommandContract && $command->name() === $commandName) {
+                if ($command instanceof CommandContract && preg_match('/' . $command->name() . '/', $commandName) === 1) {
                     return $command;
                 }
             } catch (\Throwable $ex) {

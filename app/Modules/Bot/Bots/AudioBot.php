@@ -4,6 +4,7 @@ namespace RadioBot\Modules\Bot\Bots;
 
 use RadioBot\Modules\Bot\Commands\AudioAddYoutubeTrack;
 use RadioBot\Modules\Bot\Commands\AudioClearTracks;
+use RadioBot\Modules\Bot\Commands\AudioCurrentVolume;
 use RadioBot\Modules\Bot\Commands\AudioGetTracks;
 use RadioBot\Modules\Bot\Commands\AudioHelp;
 use RadioBot\Modules\Bot\Commands\AudioOffCommand;
@@ -40,6 +41,7 @@ class AudioBot extends AbstractBot implements BotContract
             AudioGetTracks::class,
             AudioClearTracks::class,
             AudioVolume::class,
+            AudioCurrentVolume::class,
             AudioHelp::class,
         ];
     }

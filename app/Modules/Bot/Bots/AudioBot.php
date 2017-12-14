@@ -12,6 +12,7 @@ use RadioBot\Modules\Bot\Commands\AudioHelp;
 use RadioBot\Modules\Bot\Commands\AudioPlayNext;
 use RadioBot\Modules\Bot\Commands\AudioPlayTrackNumber;
 use RadioBot\Modules\Bot\Commands\AudioPlayPrevious;
+use RadioBot\Modules\Bot\Commands\AudioRandom;
 use RadioBot\Modules\Bot\Commands\AudioSearchYoutube;
 use RadioBot\Modules\Bot\Commands\AudioStop;
 use RadioBot\Modules\Bot\Commands\AudioVolume;
@@ -49,6 +50,7 @@ class AudioBot extends AbstractBot implements BotContract
             AudioVolume::class,
             AudioCurrentVolume::class,
             AudioHelp::class,
+            AudioRandom::class
         ];
     }
 

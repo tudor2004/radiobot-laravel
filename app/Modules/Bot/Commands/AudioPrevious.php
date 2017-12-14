@@ -6,9 +6,9 @@ use RadioBot\Modules\Bot\Contracts\CommandContract;
 use RadioBot\Modules\Mopidy\Client\MopidyClient;
 
 /**
- * Class AudioPlayTrackNumber
+ * Class AudioPrevious
  */
-class AudioPlayTrackNumber implements CommandContract
+class AudioPrevious implements CommandContract
 {
     /**
      * @inheritdoc
@@ -23,7 +23,7 @@ class AudioPlayTrackNumber implements CommandContract
      */
     public function name(): string
     {
-        return '!audio play( track (.+))?';
+        return '!audio previous';
     }
 
     /**
@@ -31,7 +31,7 @@ class AudioPlayTrackNumber implements CommandContract
      */
     public function description(): string
     {
-        return 'Play track by track number. If no track is given than it just plays.';
+        return 'Play the previous track.';
     }
 
     /**
@@ -42,66 +42,19 @@ class AudioPlayTrackNumber implements CommandContract
         /** @var MopidyClient $client */
         $client = app(MopidyClient::class);
 
-        $trackId = (int)$this->getTrackId($command);
-
-        $params = [];
-
-        if ($trackId) {
-            $params = [
-                'tlid' => $trackId
-            ];
-        }
-
         $response = $client->call([
-            'method' => 'core.playback.play',
-            'params' => $params,
+            'method' => 'core.playback.previous',
             'id'     => 1,
+            'params' => [],
         ]);
 
+        $nowPlayingMessage = $this->getNowPlayingMessage();
 
-        if ($trackId) {
-            $nowPlayingMessage = $this->getNowPlayingMessage();
-
-            if(!empty($nowPlayingMessage))
-            {
-                return $nowPlayingMessage;
-            }
-
-            return 'Playing track id ' . $trackId . '.';
-        }
-        else
-        {
-            $nowPlayingMessage = $this->getNowPlayingMessage();
-
-            if(!empty($nowPlayingMessage))
-            {
-                return $nowPlayingMessage;
-            }
-            else
-            {
-                return 'Playing from where I left off.';
-            }
-        }
-    }
-
-    /**
-     * Extract track name from command.
-     *
-     * @param string $command
-     *
-     * @return string|null
-     *
-     * @throws \Exception
-     */
-    private function getTrackId(string $command)
-    {
-        preg_match('/' . $this->name() . '/', $command, $matches);
-
-        if (is_array($matches) && isset($matches[2])) {
-            return $matches[2];
+        if (!empty($nowPlayingMessage)) {
+            return $nowPlayingMessage;
         }
 
-        return null;
+        return 'Nothing else to play.';
     }
 
     /**

@@ -51,7 +51,7 @@ class AudioCurrentTrack implements CommandContract
         if (isset($response['result'])) {
             $track = $response['result'];
 
-            $message = 'Currently playing: ' . PHP_EOL . '#' . $track['tlid'];
+            $message = 'Now playing: ' . PHP_EOL . '#' . $track['tlid'];
 
             if (isset($track['track']['name']) && strlen($track['track']['name'])) {
                 $message .= ' - ' . $track['track']['name'];

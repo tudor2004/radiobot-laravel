@@ -64,6 +64,6 @@ class AudioCurrentTrack implements CommandContract
             return $message;
         }
 
-        return 'I really don\'t know what the current volume is...';
+        return 'Pretty boring in here... not playing anything.';
     }
 }

@@ -35,10 +35,10 @@ class AudioBot extends AbstractBot implements BotContract
     {
         return [
             AudioAddYoutubeTrack::class,
-            AudioPlayTrackNumber::class,
             AudioCurrentTrack::class,
             AudioPlayNext::class,
             AudioPlayPrevious::class,
+            AudioPlayTrackNumber::class, // we have to register this after next and previous because of regex conflict 
             AudioStop::class,
             AudioGetTracks::class,
             AudioClearTracks::class,

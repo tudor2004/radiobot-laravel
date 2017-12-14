@@ -2,6 +2,7 @@
 
 namespace RadioBot\Modules\Bot\Bots;
 
+use RadioBot\Modules\Bot\Commands\AudioAddStream;
 use RadioBot\Modules\Bot\Commands\AudioAddYoutubeTrack;
 use RadioBot\Modules\Bot\Commands\AudioClearTracks;
 use RadioBot\Modules\Bot\Commands\AudioCurrentTrack;
@@ -35,6 +36,7 @@ class AudioBot extends AbstractBot implements BotContract
     public function commands(): array
     {
         return [
+            AudioAddStream::class,
             AudioAddYoutubeTrack::class,
             AudioCurrentTrack::class,
             AudioPlayNext::class,

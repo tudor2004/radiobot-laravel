@@ -60,7 +60,7 @@ class AudioSearchYoutube implements CommandContract
         $videoList = Youtube::getVideoInfo($foundVideoIds);
 
         $resultsMessage = [
-            'I\'ve found following tracks:'
+            'I\'ve found following tracks on YouTube:'
         ];
 
         foreach ($videoList as $video) {

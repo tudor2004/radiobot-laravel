@@ -6,9 +6,9 @@ use RadioBot\Modules\Bot\Contracts\CommandContract;
 use RadioBot\Modules\Mopidy\Client\MopidyClient;
 
 /**
- * Class AudioNext
+ * Class AudioPlayPrevious
  */
-class AudioNext implements CommandContract
+class AudioPlayPrevious implements CommandContract
 {
     /**
      * @inheritdoc
@@ -23,7 +23,7 @@ class AudioNext implements CommandContract
      */
     public function name(): string
     {
-        return '!audio next';
+        return '!audio play previous';
     }
 
     /**
@@ -31,7 +31,7 @@ class AudioNext implements CommandContract
      */
     public function description(): string
     {
-        return 'Play the next track.';
+        return 'Play the previous track.';
     }
 
     /**
@@ -43,7 +43,7 @@ class AudioNext implements CommandContract
         $client = app(MopidyClient::class);
 
         $response = $client->call([
-            'method' => 'core.playback.next',
+            'method' => 'core.playback.previous',
             'id'     => 1,
             'params' => [],
         ]);

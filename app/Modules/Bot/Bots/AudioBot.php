@@ -8,9 +8,9 @@ use RadioBot\Modules\Bot\Commands\AudioCurrentTrack;
 use RadioBot\Modules\Bot\Commands\AudioCurrentVolume;
 use RadioBot\Modules\Bot\Commands\AudioGetTracks;
 use RadioBot\Modules\Bot\Commands\AudioHelp;
-use RadioBot\Modules\Bot\Commands\AudioNext;
+use RadioBot\Modules\Bot\Commands\AudioPlayNext;
 use RadioBot\Modules\Bot\Commands\AudioPlayTrackNumber;
-use RadioBot\Modules\Bot\Commands\AudioPrevious;
+use RadioBot\Modules\Bot\Commands\AudioPlayPrevious;
 use RadioBot\Modules\Bot\Commands\AudioStop;
 use RadioBot\Modules\Bot\Commands\AudioVolume;
 use RadioBot\Modules\Bot\Contracts\BotContract;
@@ -37,8 +37,8 @@ class AudioBot extends AbstractBot implements BotContract
             AudioAddYoutubeTrack::class,
             AudioPlayTrackNumber::class,
             AudioCurrentTrack::class,
-            AudioNext::class,
-            AudioPrevious::class,
+            AudioPlayNext::class,
+            AudioPlayPrevious::class,
             AudioStop::class,
             AudioGetTracks::class,
             AudioClearTracks::class,

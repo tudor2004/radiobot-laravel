@@ -11,6 +11,7 @@ use RadioBot\Modules\Bot\Commands\AudioHelp;
 use RadioBot\Modules\Bot\Commands\AudioPlayNext;
 use RadioBot\Modules\Bot\Commands\AudioPlayTrackNumber;
 use RadioBot\Modules\Bot\Commands\AudioPlayPrevious;
+use RadioBot\Modules\Bot\Commands\AudioSearchYoutube;
 use RadioBot\Modules\Bot\Commands\AudioStop;
 use RadioBot\Modules\Bot\Commands\AudioVolume;
 use RadioBot\Modules\Bot\Contracts\BotContract;
@@ -38,9 +39,10 @@ class AudioBot extends AbstractBot implements BotContract
             AudioCurrentTrack::class,
             AudioPlayNext::class,
             AudioPlayPrevious::class,
-            AudioPlayTrackNumber::class, // we have to register this after next and previous because of regex conflict 
+            AudioPlayTrackNumber::class, // we have to register this after next and previous because of regex conflict
             AudioStop::class,
             AudioGetTracks::class,
+            AudioSearchYoutube::class,
             AudioClearTracks::class,
             AudioVolume::class,
             AudioCurrentVolume::class,

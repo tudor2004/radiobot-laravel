@@ -2,8 +2,8 @@
 
 namespace RadioBot\Modules\Bot\Commands;
 
-use RadioBot\Modules\Bot\Contracts\CommandContract;
 use RadioBot\Modules\Mopidy\Client\MopidyClient;
+use Tudorica\GoogleBot\Contracts\CommandContract;
 
 /**
  * Class AudioPlayPrevious

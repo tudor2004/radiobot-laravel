@@ -16,12 +16,13 @@ use RadioBot\Modules\Bot\Commands\AudioRandom;
 use RadioBot\Modules\Bot\Commands\AudioSearchYoutube;
 use RadioBot\Modules\Bot\Commands\AudioStop;
 use RadioBot\Modules\Bot\Commands\AudioVolume;
-use RadioBot\Modules\Bot\Contracts\BotContract;
+use Tudorica\GoogleBot\Contracts\BotContract;
+use Tudorica\GoogleBot\Services\BotService;
 
 /**
  * Class AudioBot
  */
-class AudioBot extends AbstractBot implements BotContract
+class AudioBot implements BotContract
 {
     /**
      * @inheritDoc
@@ -53,5 +54,4 @@ class AudioBot extends AbstractBot implements BotContract
             AudioRandom::class
         ];
     }
-
 }

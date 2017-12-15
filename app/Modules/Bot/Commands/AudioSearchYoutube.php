@@ -3,7 +3,7 @@
 namespace RadioBot\Modules\Bot\Commands;
 
 use Alaouy\Youtube\Facades\Youtube;
-use RadioBot\Modules\Bot\Contracts\CommandContract;
+use Tudorica\GoogleBot\Contracts\CommandContract;
 
 /**
  * Class AudioSearchYoutube

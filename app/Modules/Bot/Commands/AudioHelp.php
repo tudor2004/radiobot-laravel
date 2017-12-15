@@ -3,8 +3,8 @@
 namespace RadioBot\Modules\Bot\Commands;
 
 use RadioBot\Modules\Bot\Bots\AudioBot;
-use RadioBot\Modules\Bot\Contracts\CommandContract;
-use RadioBot\Modules\Bot\Factories\BotFactory;
+use Tudorica\GoogleBot\Contracts\CommandContract;
+use Tudorica\GoogleBot\Factories\BotFactory;
 
 /**
  * Class AudioClearTracks

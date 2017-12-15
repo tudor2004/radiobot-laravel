@@ -36,7 +36,7 @@ class MopidyClient
     {
         $data['jsonrpc'] = '2.0';
 
-        $response = $this->client->post(config('mopidy.host') .':' . config('mopidy.port') . '/mopidy/rpc', [
+        $response = $this->client->post(config('mopidy.host') .':' . config('mopidy.port') . '/api/mopidy', [
             'headers' => [
                 'Content-Type' => 'application/json'
             ],

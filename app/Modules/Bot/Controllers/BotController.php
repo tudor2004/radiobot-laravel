@@ -6,9 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use RadioBot\Http\Controllers\Controller;
 use RadioBot\Modules\Bot\Bots\AudioBot;
-use RadioBot\Modules\Bot\Contracts\BotContract;
-use RadioBot\Modules\Bot\Exceptions\BotFactoryException;
-use RadioBot\Modules\Bot\Factories\BotFactory;
 
 class BotController extends Controller
 {
@@ -16,6 +13,8 @@ class BotController extends Controller
      * All incoming web hook request.
      *
      * @param Request $request
+     *
+     * @throws \Exception
      */
     public function webhook(Request $request)
     {
@@ -23,17 +22,12 @@ class BotController extends Controller
 
         Log::info('Incoming headers', $request->header());
 
-        /** @var BotFactory $botFactory */
-        $botFactory = app(BotFactory::class);
-
-        /** @var BotContract $bot */
         try
         {
-            $bot = $botFactory->make(AudioBot::class, $request->all());
+            return \GoogleBot::run(AudioBot::class, $request->all());
 
-            return $bot->run();
         }
-        catch(BotFactoryException $ex)
+        catch(\Exception $ex)
         {
             Log::err('Bot does not exists.', $ex);
         }

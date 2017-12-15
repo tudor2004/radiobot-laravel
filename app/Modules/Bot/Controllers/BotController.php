@@ -29,7 +29,7 @@ class BotController extends Controller
         }
         catch(\Exception $ex)
         {
-            Log::err('Bot does not exists.', $ex);
+            Log::error('Bot does not exists.', [$ex->getMessage()]);
         }
     }
 }
